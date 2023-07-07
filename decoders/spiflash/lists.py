@@ -29,17 +29,20 @@ cmds = OrderedDict([
     (0x05, ('RDSR', 'Read status register')),
     (0x06, ('WREN', 'Write enable')),
     (0x0b, ('FAST/READ', 'Fast read data')),
+    (0x13, ('READ4BA', 'Read Data with 4-Byte Address')),
     (0x20, ('SE', 'Sector erase')),
     (0x2b, ('RDSCUR', 'Read security register')),
     (0x2f, ('WRSCUR', 'Write security register')),
     (0x35, ('RDSR2', 'Read status register 2')),
+    (0x4b, ('RUID'), 'Read Unique ID'),
+    (0x50) ('VSRWE', 'Volatile Status Register Write Enable'),
     (0x60, ('CE', 'Chip erase')),
     (0x70, ('ESRY', 'Enable SO to output RY/BY#')),
     (0x80, ('DSRY', 'Disable SO to output RY/BY#')),
     (0x82, ('WRITE1', 'Main memory page program through buffer 1 with built-in erase')),
     (0x85, ('WRITE2', 'Main memory page program through buffer 2 with built-in erase')),
     (0x90, ('REMS', 'Read electronic manufacturer & device ID')),
-    (0x9f, ('RDID', 'Read identification')),
+    (0x9f, ('RDID', 'Read JEDEC ID')),
     (0xab, ('RDP/RES', 'Release from deep powerdown / Read electronic ID')),
     (0xad, ('CP', 'Continuously program mode')),
     (0xb1, ('ENSO', 'Enter secured OTP')),
@@ -67,6 +70,7 @@ device_name = {
     },
     'winbond': {
         0x13: 'W25Q80DV',
+        0x19: 'W25Q512JV-FIM',
     },
 }
 
@@ -175,4 +179,16 @@ chips = {
         'sector_size': 4 * 1024,
         'block_size': 64 * 1024, # Configurable, could also be 32 * 1024 bytes.
     },
+    'winbond_w25q512jv_fim': {
+        'vendor': 'Winbond',
+        'model': 'W25Q512JV-FIM',
+        'res_id': 0x19,
+        'rems_id': 0xef19,
+        'rems2_id': None, # Not supported by the chip.
+        'rdid_id': 0xef7020,
+        'page_size': 256,
+        'sector_size': 4 * 1024,
+        'block_size': 64 * 1024,
+    },
+
 }
